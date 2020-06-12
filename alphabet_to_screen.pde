@@ -3,7 +3,7 @@ int blockSize =5;
 
 void setup()
 {   size(400, 400);
-    createBlocks("pRocEssiNG");
+    createBlocks("quick brown fox jumps");
 }
 
 void draw()
@@ -92,11 +92,22 @@ void convertAlphaToBlocks(char c, int startX, int startY )
       }
 }
 void createBlocks(String word)
-{   String temp = word.toUpperCase();
-    int rowX = 25, rowY= 140;  
+{   
+    String temp[] = word.toUpperCase().split(" ");
+    int rowX , rowY;  
     //Convert each character in the word to its corresponding blocks
-    for ( int i = 0; i < temp.length(); i++)
-    {     convertAlphaToBlocks(temp.charAt(i), rowX, rowY);
-          rowX = rowX + blockSize * 7;
+    
+    rowY = max(20, 200 - ( 6 * blockSize * temp.length ) );
+      
+    
+    for (int j = 0; j < temp.length; j++)
+    { rowX = max(20, 200 - ( 5 * blockSize + (temp[j].length() - 1) * 7 * blockSize)/2 );
+      
+      
+     for ( int i = 0; i < temp[j].length(); i++)
+      {     convertAlphaToBlocks(temp[j].charAt(i), rowX, rowY);
+            rowX = rowX + blockSize * 7;
+      }
+      rowY = rowY + blockSize * 12;
     }
 }
